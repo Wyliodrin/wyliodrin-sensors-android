@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -93,11 +94,14 @@ public class MainActivity extends ActionBarActivity {
             String token = scanResult.getContents();
             if (token.contains("wyliodrin:gadget:")) {
                 token = token.replace("wyliodrin:gadget://", "");
-            }
-            wylioBoard = new WylioBoard(token);
 
-            Button sendBtn = (Button) findViewById(R.id.send_button);
-            sendBtn.setText("Send");
+                wylioBoard = new WylioBoard(token);
+
+                Button sendBtn = (Button) findViewById(R.id.send_button);
+                sendBtn.setText("Send");
+            } else {
+                Toast.makeText(this, token.length(), Toast.LENGTH_LONG).show();
+            }
         }
 
     }

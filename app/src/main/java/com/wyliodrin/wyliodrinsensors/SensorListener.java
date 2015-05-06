@@ -38,7 +38,7 @@ public class SensorListener implements SensorEventListener {
         Log.d("sensor changed ", sensor.getSensor().getName().toString());
 
         JSONArray values = new JSONArray();
-//+ un camp name luat dintr-un input
+
         if (MainActivity.wylioBoard != null) {
             for (int i = 0; i < sensorEvent.values.length; i++) {
                 try {
@@ -46,7 +46,9 @@ public class SensorListener implements SensorEventListener {
                 } catch (JSONException e) {
                 }
             }
-            MainActivity.wylioBoard.sendMessage("mobile:id:" + getId(), values.toString());
+
+            //mobile:sensor_name:string_id
+            MainActivity.wylioBoard.sendMessage("mobile:" + getId()+":id", values.toString());
         }
     }
 
