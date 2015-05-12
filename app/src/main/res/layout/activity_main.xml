@@ -2,25 +2,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:paddingLeft="0px"
+    android:paddingRight="0px"
+    android:paddingTop="0px"
+    android:paddingBottom="0px"
+    android:background="#e5e5e5"
     tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#ffffff"
+        android:id="@+id/header"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:src="@drawable/wyliodrin"
+            android:scaleType="fitStart"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="25px"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            android:id="@+id/menu"
+            android:layout_margin="25px"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/send_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:background="#e64226"
+        android:textColor="#ffffff"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:text="Scan Token"/>
 
     <ListView
         android:id="@+id/sensors_list"
         android:layout_width="match_parent"
-        android:layout_above="@id/send_button"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_above="@id/send_button">
     </ListView>
+
+
 
 </RelativeLayout>

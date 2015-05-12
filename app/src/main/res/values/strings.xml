@@ -2,6 +2,25 @@
 <resources>
 
     <string name="app_name">Wyliodrin Sensors</string>
+    <string name="title_activity_settings">Wyliodrin Settings</string>
     <string name="action_settings">Settings</string>
+    <string name="phone_id">Phone ID</string>
+    <string name="speed">Signals speed</string>
+
+    <string-array name="speed_titles">
+        <!--<item>10 every second</item>-->
+        <!--<item>5 every second</item>-->
+        <item>1 every second</item>
+        <item>10 every minute</item>
+        <item>1 every minute</item>
+    </string-array>
+
+    <string-array name="speed_values">
+        <!--<item>100</item>-->
+        <!--<item>500</item>-->
+        <item>1000</item>
+        <item>6000</item>
+        <item>60000</item>
+    </string-array>
 
 </resources>

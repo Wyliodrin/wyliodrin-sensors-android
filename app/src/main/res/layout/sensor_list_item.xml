@@ -1,20 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:id="@+id/sensor_image"
+        android:src="@drawable/orientation"
+        android:layout_weight="0"
+        />
+
     <TextView
         android:id="@+id/sensor_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/enable_sensor"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:layout_weight="1"
+        android:text="Value"
         />
 
     <CheckBox
         android:id="@+id/enable_sensor"
         android:layout_alignParentRight="true"
+        android:button="@drawable/select"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:clickable="false"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:layout_margin="10dp"
+        android:layout_weight="0"/>
 
-</RelativeLayout>
+
+</LinearLayout>

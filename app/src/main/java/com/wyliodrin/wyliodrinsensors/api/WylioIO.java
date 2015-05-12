@@ -91,7 +91,7 @@ public class WylioIO {
 //			System.out.println(response.toString());
 			if (responseCode != 200)
 			{
-				System.out.println("WylioIO: error for post request "+url+" "+json);
+				System.out.println("WylioIO: error for post request "+responseCode+" "+url+" "+json);
 			}
 		}
 		catch (Exception ex)

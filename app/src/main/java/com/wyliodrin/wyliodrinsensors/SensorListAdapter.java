@@ -2,12 +2,15 @@ package com.wyliodrin.wyliodrinsensors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +25,21 @@ public class SensorListAdapter extends BaseAdapter {
     private List<WyliodrinSensor> elements;
     private Activity contex;
 
+    private SensorsListListener listener;
+
+    private SharedPreferences prefs;
+
+    class Items
+    {
+        public TextView textView;
+        public ImageView sensorImage;
+        public CheckBox checkBox;
+    }
+
     public SensorListAdapter(Activity context) {
         this.contex = context;
+        if (context instanceof SensorsListListener) this.listener = (SensorsListListener)context;
+        prefs = PreferenceManager.getDefaultSharedPreferences(contex);
         elements = new ArrayList<WyliodrinSensor>();
     }
 
@@ -45,7 +61,7 @@ public class SensorListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View item;
-        Sensor sensor;
+        WyliodrinSensor sensor;
 
         if (view != null) {
             item = view;
@@ -54,21 +70,42 @@ public class SensorListAdapter extends BaseAdapter {
             item = layoutInflater.inflate(R.layout.sensor_list_item, viewGroup, false);
         }
 
-        sensor = elements.get(i).getSensor();
-        TextView textView = (TextView) item.findViewById(R.id.sensor_text);
-        textView.setText(sensor.getName());
+        Items items = (Items)item.getTag ();
+        if (items == null)
+        {
+            items = new Items ();
+            items.textView = (TextView) item.findViewById(R.id.sensor_text);
 
-        CheckBox checkBox = (CheckBox) item.findViewById(R.id.enable_sensor);
-        checkBox.setChecked(elements.get(i).isChecked());
+            items.checkBox = (CheckBox) item.findViewById(R.id.enable_sensor);
+
+            items.sensorImage = (ImageView) item.findViewById(R.id.sensor_image);
+
+            item.setTag(items);
+
+        }
+
+        sensor = elements.get(i);
+
+        items.textView.setText(sensor.getName());
+        items.checkBox.setChecked(elements.get(i).isChecked());
+        items.sensorImage.setImageResource(contex.getResources().getIdentifier(sensor.getType(), "drawable", contex.getPackageName()));
 
         return item;
     }
 
     public void addItem (Sensor sensor) {
-        elements.add(new WyliodrinSensor(sensor));
+        WyliodrinSensor wyliodrinSensor = new WyliodrinSensor(sensor);
+        wyliodrinSensor.setChecked(prefs.getBoolean (wyliodrinSensor.getType(), false));
+        elements.add(wyliodrinSensor);
+    }
+    public void addItem (String sensorType) {
+        WyliodrinSensor wyliodrinSensor = new WyliodrinSensor(sensorType);
+        wyliodrinSensor.setChecked(prefs.getBoolean (wyliodrinSensor.getType(), false));
+        elements.add(wyliodrinSensor);
     }
 
     public void toggleItem (int i) {
         elements.get(i).toggle();
+        if (listener != null) listener.sensorsListToggle();
     }
 }

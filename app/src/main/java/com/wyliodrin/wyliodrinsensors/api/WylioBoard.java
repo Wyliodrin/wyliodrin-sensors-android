@@ -148,6 +148,7 @@ public class WylioBoard {
 	public static void sendOpenMessage (JSONObject json)
 	{
 		final String s = json.toString();
+		System.out.println(s);
 		new Thread ()
 		{
 			public void run ()
