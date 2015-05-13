@@ -20,11 +20,11 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:src="@drawable/wyliodrin"
             android:scaleType="fitStart"
             android:layout_gravity="center_vertical"
-            android:layout_margin="25px"
+            android:layout_margin="20dp"
             android:layout_weight="1"
             />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/menu"
             android:id="@+id/menu"
-            android:layout_margin="25px"
+            android:layout_margin="25dp"
             android:layout_gravity="center_vertical"
             />
 
@@ -42,7 +42,7 @@
     <Button
         android:id="@+id/send_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:background="#e64226"
         android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceLarge"

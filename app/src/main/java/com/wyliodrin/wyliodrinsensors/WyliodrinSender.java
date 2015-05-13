@@ -26,7 +26,7 @@ public class WyliodrinSender extends Thread
             int speed = Integer.parseInt(prefs.getString("speed", "1000"));
             synchronized (SensorListener.mutex)
             {
-                System.out.println("sending message");
+                // System.out.println("sending message");
                 if (SensorListener.message != null && MainActivity.wylioBoard != null) MainActivity.wylioBoard.sendMessage("mobile:"+phone_id, SensorListener.message);
                 SensorListener.message = null;
             }

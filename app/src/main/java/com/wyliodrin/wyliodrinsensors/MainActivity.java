@@ -88,6 +88,8 @@ public class MainActivity extends Activity implements SensorsListListener {
 
         sensorsList.setAdapter(adapter);
 
+        sensorsListToggle();
+
         sensorsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -195,6 +197,7 @@ public class MainActivity extends Activity implements SensorsListListener {
         }
 
         wyliodrinSender.quit();
+        wyliodrinSender = null;
     }
 
 //    @Override

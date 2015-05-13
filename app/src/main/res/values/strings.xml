@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Wyliodrin Sensors</string>
-    <string name="title_activity_settings">Wyliodrin Settings</string>
+    <string name="title_activity_settings">Wyliodrin Sensors Settings</string>
     <string name="action_settings">Settings</string>
     <string name="phone_id">Phone ID</string>
     <string name="speed">Signals speed</string>

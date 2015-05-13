@@ -72,6 +72,10 @@ public class WyliodrinSensor {
                 return "relative_humidity";
             case Sensor.TYPE_ROTATION_VECTOR:
                 return "rotation_vector";
+            case Sensor.TYPE_GAME_ROTATION_VECTOR:
+                return "game_rotation_vector";
+            case Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR:
+                return "geomagnetic_rotation_vector";
             case Sensor.TYPE_TEMPERATURE:
                 return "temperature";
             case Sensor.TYPE_STEP_COUNTER:
@@ -130,15 +134,34 @@ public class WyliodrinSensor {
         JSONObject json = new JSONObject();
         try {
             switch (sensor.getType()) {
+                case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
+                    json.put("x", event.values[0]);
+                    json.put("y", event.values[1]);
+                    json.put("z", event.values[2]);
+                    json.put("drift_x", event.values[3]);
+                    json.put("drift_y", event.values[4]);
+                    json.put("drift_z", event.values[5]);
+                    break;
+                case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
+                    json.put("x", event.values[0]);
+                    json.put("y", event.values[1]);
+                    json.put("z", event.values[2]);
+                    json.put("bias_x", event.values[3]);
+                    json.put("bias_y", event.values[4]);
+                    json.put("bias_z", event.values[5]);
+                    break;
+                case Sensor.TYPE_ORIENTATION:
+                    json.put("azimuth", event.values[0]);
+                    json.put("pitch", event.values[1]);
+                    json.put("roll", event.values[2]);
+                    break;
                 case Sensor.TYPE_ACCELEROMETER:
                 case Sensor.TYPE_GRAVITY:
                 case Sensor.TYPE_GYROSCOPE:
                 case Sensor.TYPE_LINEAR_ACCELERATION:
                 case Sensor.TYPE_MAGNETIC_FIELD:
-                case Sensor.TYPE_ORIENTATION:
                 case Sensor.TYPE_ROTATION_VECTOR:
-                case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
-                case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
+                case Sensor.TYPE_GAME_ROTATION_VECTOR:
                     json.put("x", event.values[0]);
                     json.put("y", event.values[1]);
                     json.put("z", event.values[2]);
@@ -147,38 +170,24 @@ public class WyliodrinSensor {
                     json.put ("value", event.values[0]);
                     break;
                 case Sensor.TYPE_LIGHT:
-                    if (event.values.length == 3)
-                    {
-                        json.put ("red", event.values[0]);
-                        json.put ("green", event.values[1]);
-                        json.put ("blue", event.values[2]);
-                    }
-                    else
-                    {
-                        json.put ("value", event.values[0]);
-                    }
-                    break;
+//                    if (event.values.length == 3)
+//                    {
+//                        json.put ("red", event.values[0]);
+//                        json.put ("green", event.values[1]);
+//                        json.put ("blue", event.values[2]);
+//                    }
+//                    else
+//                    {
+//                        json.put ("value", event.values[0]);
+//                    }
+//                    break;
                 case Sensor.TYPE_HEART_RATE:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_PRESSURE:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_PROXIMITY:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_RELATIVE_HUMIDITY:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_TEMPERATURE:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_STEP_COUNTER:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_STEP_DETECTOR:
-                    json.put ("value", event.values[0]);
-                    break;
                 case Sensor.TYPE_SIGNIFICANT_MOTION:
                     json.put ("value", event.values[0]);
                     break;
