@@ -5,7 +5,7 @@ import org.json.JSONException;
 
 public class WylioBoard {
 	
-	public static final String WYLIO_ADDRESS = "https://www.wyliodrin.com/";
+	public static String WYLIO_ADDRESS = "https://www.wyliodrin.com/";
 	
 	private String communication_token;
 	private String boardid;

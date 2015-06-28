@@ -67,6 +67,7 @@ public class Settings extends PreferenceActivity {
 
         bindPreferenceSummaryToValue(findPreference("phone id"));
         bindPreferenceSummaryToValue(findPreference("speed"));
+        bindPreferenceSummaryToValue(findPreference("application"));
     }
 
     /**

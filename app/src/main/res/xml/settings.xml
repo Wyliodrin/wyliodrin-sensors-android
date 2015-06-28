@@ -22,4 +22,13 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
 
+    <ListPreference
+        android:key="application"
+        android:title="@string/application"
+        android:defaultValue="https://www.wyliodrin.com"
+        android:entries="@array/application_titles"
+        android:entryValues="@array/application_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
 </PreferenceScreen>

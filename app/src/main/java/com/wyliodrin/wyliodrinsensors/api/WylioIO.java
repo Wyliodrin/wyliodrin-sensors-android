@@ -3,6 +3,7 @@ package com.wyliodrin.wyliodrinsensors.api;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -57,7 +58,7 @@ public class WylioIO {
 		try
 		{
 			URL obj = new URL(url);
-			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	 
 			//add reuqest header
 			con.setRequestMethod("POST");

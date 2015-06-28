@@ -39,7 +39,7 @@ import java.util.TimerTask;
 import static android.app.AlertDialog.*;
 
 
-public class MainActivity extends Activity implements SensorsListListener {
+public class MainActivity extends Activity implements SensorsListListener, SensorSenderListener {
 
     public static WylioBoard wylioBoard = null;
 
@@ -60,6 +60,7 @@ public class MainActivity extends Activity implements SensorsListListener {
 
         if (wyliodrinSender == null) {
             wyliodrinSender = new WyliodrinSender(this);
+            wyliodrinSender.setSensorSenderListener(this);
             wyliodrinSender.start();
         }
 
@@ -239,6 +240,14 @@ public class MainActivity extends Activity implements SensorsListListener {
                 }
             }
             prefs.commit();
+        }
+    }
+
+    @Override
+    public void valuesReset() {
+        for (SensorListener listener:listeners)
+        {
+            listener.valuesReset();
         }
     }
 }

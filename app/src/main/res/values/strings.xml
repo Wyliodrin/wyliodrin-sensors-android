@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="phone_id">Phone ID</string>
     <string name="speed">Signals speed</string>
+    <string name="application">Application</string>
 
     <string-array name="speed_titles">
         <!--<item>10 every second</item>-->
@@ -21,6 +22,20 @@
         <item>1000</item>
         <item>6000</item>
         <item>60000</item>
+    </string-array>
+
+    <string-array name="application_titles">
+        <!--<item>10 every second</item>-->
+        <!--<item>5 every second</item>-->
+        <item>Wylidorin</item>
+        <item>University Politehnica of Bucharest</item>
+    </string-array>
+
+    <string-array name="application_values">
+        <!--<item>100</item>-->
+        <!--<item>500</item>-->
+        <item>https://www.wyliodrin.com/</item>
+        <item>http://projects.wyliodrin.cs.pub.ro/</item>
     </string-array>
 
 </resources>

@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.location.Location;
 import android.preference.PreferenceManager;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -17,6 +18,7 @@ public class WyliodrinSensor {
     private boolean checked;
     private String type;
     private String name;
+    private JSONObject json;
 
     public WyliodrinSensor (Sensor sensor) {
         this.sensor = sensor;
@@ -118,7 +120,7 @@ public class WyliodrinSensor {
         JSONObject json = new JSONObject();
         try {
             json.put ("latitude", location.getLatitude());
-            json.put ("longitude", location.getLongitude());
+            json.put("longitude", location.getLongitude());
         }
         catch (Exception ex)
         {
@@ -129,31 +131,51 @@ public class WyliodrinSensor {
         return json;
     }
 
+    private void addSensorPoint (JSONObject json, String str, double value)
+    {
+        if (!json.has(str)) {
+            try
+            {
+                json.put(str, new JSONArray());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        try
+        {
+            json.getJSONArray(str).put(value);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public JSONObject getData (SensorEvent event)
     {
-        JSONObject json = new JSONObject();
+        if (json == null) json = new JSONObject();
         try {
             switch (sensor.getType()) {
                 case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
-                    json.put("x", event.values[0]);
-                    json.put("y", event.values[1]);
-                    json.put("z", event.values[2]);
-                    json.put("drift_x", event.values[3]);
-                    json.put("drift_y", event.values[4]);
-                    json.put("drift_z", event.values[5]);
+                    addSensorPoint(json, "x", event.values[0]);
+                    addSensorPoint(json, "y", event.values[1]);
+                    addSensorPoint(json, "z", event.values[2]);
+                    addSensorPoint(json, "drift_x", event.values[3]);
+                    addSensorPoint(json, "drift_y", event.values[4]);
+                    addSensorPoint(json, "drift_z", event.values[5]);
                     break;
                 case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
-                    json.put("x", event.values[0]);
-                    json.put("y", event.values[1]);
-                    json.put("z", event.values[2]);
-                    json.put("bias_x", event.values[3]);
-                    json.put("bias_y", event.values[4]);
-                    json.put("bias_z", event.values[5]);
+                    addSensorPoint(json, "x", event.values[0]);
+                    addSensorPoint(json, "y", event.values[1]);
+                    addSensorPoint(json, "z", event.values[2]);
+                    addSensorPoint(json, "bias_x", event.values[3]);
+                    addSensorPoint(json, "bias_y", event.values[4]);
+                    addSensorPoint(json, "bias_z", event.values[5]);
                     break;
                 case Sensor.TYPE_ORIENTATION:
-                    json.put("azimuth", event.values[0]);
-                    json.put("pitch", event.values[1]);
-                    json.put("roll", event.values[2]);
+                    addSensorPoint(json, "azimuth", event.values[0]);
+                    addSensorPoint(json, "pitch", event.values[1]);
+                    addSensorPoint(json, "roll", event.values[2]);
                     break;
                 case Sensor.TYPE_ACCELEROMETER:
                 case Sensor.TYPE_GRAVITY:
@@ -162,12 +184,12 @@ public class WyliodrinSensor {
                 case Sensor.TYPE_MAGNETIC_FIELD:
                 case Sensor.TYPE_ROTATION_VECTOR:
                 case Sensor.TYPE_GAME_ROTATION_VECTOR:
-                    json.put("x", event.values[0]);
-                    json.put("y", event.values[1]);
-                    json.put("z", event.values[2]);
+                    addSensorPoint(json, "x", event.values[0]);
+                    addSensorPoint(json, "y", event.values[1]);
+                    addSensorPoint(json, "z", event.values[2]);
                     break;
                 case Sensor.TYPE_AMBIENT_TEMPERATURE:
-                    json.put ("value", event.values[0]);
+                    addSensorPoint(json, "value", event.values[0]);
                     break;
                 case Sensor.TYPE_LIGHT:
 //                    if (event.values.length == 3)
@@ -189,7 +211,7 @@ public class WyliodrinSensor {
                 case Sensor.TYPE_STEP_COUNTER:
                 case Sensor.TYPE_STEP_DETECTOR:
                 case Sensor.TYPE_SIGNIFICANT_MOTION:
-                    json.put ("value", event.values[0]);
+                    addSensorPoint(json, "value", event.values[0]);
                     break;
             }
         }
@@ -200,5 +222,10 @@ public class WyliodrinSensor {
 
         }
         return json;
+    }
+
+    public void reset ()
+    {
+        json = null;
     }
 }

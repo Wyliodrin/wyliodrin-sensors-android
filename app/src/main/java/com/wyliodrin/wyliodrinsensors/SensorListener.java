@@ -22,7 +22,7 @@ import java.util.Objects;
 /**
  * Created by Andreea Stoican on 29.04.2015.
  */
-public class SensorListener implements SensorEventListener, LocationListener {
+public class SensorListener implements SensorEventListener, LocationListener, SensorSenderListener {
 
     private static long UPDATE_TIMEOUT = 1000;
 
@@ -47,8 +47,8 @@ public class SensorListener implements SensorEventListener, LocationListener {
 
         String phone_id = prefs.getString("phone id", "phone_id");
 
-        if (time - lastUpdate < UPDATE_TIMEOUT/2) //10 pe sec (sa fac o mediere)
-            return;
+//        if (time - lastUpdate < UPDATE_TIMEOUT/2) //10 pe sec (sa fac o mediere)
+//            return;
 
         lastUpdate = time;
         Log.d("sensor changed ", sensor.getName().toString());
@@ -63,7 +63,7 @@ public class SensorListener implements SensorEventListener, LocationListener {
                     if (!json.has("value")) {
                         message.put(sensor.getType(), json);
                     } else {
-                        message.put (sensor.getType(), json.getDouble("value"));
+                        message.put (sensor.getType(), json.getJSONArray("value"));
                     }
                 }
             }
@@ -170,5 +170,10 @@ public class SensorListener implements SensorEventListener, LocationListener {
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+
+    @Override
+    public void valuesReset() {
+        this.sensor.reset ();
     }
 }
