@@ -20,6 +20,8 @@ public class WyliodrinSensor {
     private String name;
     private JSONObject json;
 
+    public static final int MAXDATA = 120;
+
     public WyliodrinSensor (Sensor sensor) {
         this.sensor = sensor;
         checked = false;
@@ -143,7 +145,10 @@ public class WyliodrinSensor {
         }
         try
         {
-            json.getJSONArray(str).put(value);
+            JSONArray sensordata = json.getJSONArray(str);
+            if (sensordata.length() < MAXDATA) {
+                sensordata.put(value);
+            }
         }
         catch (Exception e)
         {

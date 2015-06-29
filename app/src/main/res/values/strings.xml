@@ -28,6 +28,7 @@
         <!--<item>10 every second</item>-->
         <!--<item>5 every second</item>-->
         <item>Wylidorin</item>
+        <item>Prototyping Lab Cloud</item>
         <item>University Politehnica of Bucharest</item>
     </string-array>
 
@@ -35,6 +36,7 @@
         <!--<item>100</item>-->
         <!--<item>500</item>-->
         <item>https://www.wyliodrin.com/</item>
+        <item>https://pl.ioehackathon.com/</item>
         <item>http://projects.wyliodrin.cs.pub.ro/</item>
     </string-array>
 
